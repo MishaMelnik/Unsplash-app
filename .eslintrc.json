@@ -16,6 +16,7 @@
   },
   "plugins": ["react", "prettier", "react-hooks"],
   "rules": {
+    "react/prop-types": "off",
     "no-unused-vars": "warn",
     "react/display-name": "off"
   }

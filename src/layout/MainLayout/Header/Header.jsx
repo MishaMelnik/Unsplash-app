@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // MATERIAL-UI
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { AppBar, IconButton, Toolbar } from '@mui/material';
+import { IconButton } from '@mui/material';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
@@ -17,36 +17,34 @@ const Header = () => {
     setMenuClicked(!menuClicked);
   };
   return (
-    <AppBar>
-      <Toolbar className="header">
+    <div className="header">
+      <div className="header_container container">
         {menuClicked ? (
-          <IconButton onClick={toggleMenuClick}>
-            <MenuIcon className="header_menu" />
+          <IconButton className="container_menu" onClick={toggleMenuClick}>
+            <MenuIcon />
           </IconButton>
         ) : (
           <IconButton onClick={toggleMenuClick}>
-            <CloseIcon className="header_menu" />
+            <CloseIcon className="container_menu" />
           </IconButton>
         )}
-        <aside>
-          <ul className={menuClicked ? 'header_list' : 'header_list header_list--active'}>
-            {navbarLinks.map((item) => {
-              return (
-                <li className="header_item" key={item.title}>
-                  <span className="header_link">{item.title}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
+        <ul className={menuClicked ? 'container_list' : 'container_list container_list--active'}>
+          {navbarLinks.map((item) => {
+            return (
+              <li className="container_item" key={item.title}>
+                <span className="container_link">{item.title}</span>
+              </li>
+            );
+          })}
+        </ul>
         <IconButton>
           <PersonOutlineRoundedIcon />
         </IconButton>
         <IconButton>
           <SearchIcon />
         </IconButton>
-      </Toolbar>
-    </AppBar>
+      </div>
+    </div>
   );
 };
 
