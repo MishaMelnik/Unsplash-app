@@ -28,39 +28,37 @@ const Main = () => {
         <div className="main_container container">
           <div className="container_boxDescription">
             <div className="container_description">
-              <Typography className="container_subtitle1" variant="subtitle1">
+              <span className="container_subtitle1">
                 Photo of the
                 <br />
                 Day by
                 <br />
                 Mary Skrynnikova
-              </Typography>
-              <Typography className="container_subtitle2" variant="subtitle2" paragraph>
-                Mary Skrynnikova
-              </Typography>
-              <Button className="container_button">Explore All</Button>
+              </span>
+              <span className="container_subtitle2">Mary Skrynnikova</span>
+              <button className="container_button">Explore All</button>
             </div>
           </div>
-          <div className="container_searchLineBox searchLineBox">
-            <div className="searchLineBox_line">
-              <form className="searchLineBox_form">
+          <div className="container_searchLineBox">
+            <div className="container_line">
+              <form className="container_form">
                 <InputBase
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="searchLineBox_inputBase"
+                  className="container_inputBase"
                   placeholder="Search for high-resolution photos"
                 />
                 <IconButton>
                   <SearchIcon />
                 </IconButton>
               </form>
-              <div className="searchLineBox_toolbar toolbar">
+              <div className="container_toolbar toolbar">
                 <div>
                   <ul className="toolbar_list">
                     {navbarLinks.map((item) => {
                       return (
                         <li className="toolbar_item" key={item.title}>
-                          <Button className="toolbar_link">{item.title}</Button>
+                          <span className="toolbar_link">{item.title}</span>
                         </li>
                       );
                     })}
@@ -69,9 +67,9 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="main_boxImg">
-          <img className="main_img" src={img} alt="img" />
+          <div className="container_boxImg">
+            <img className="container_img" src={img} alt="img" />
+          </div>
         </div>
       </div>
       <Posts />
