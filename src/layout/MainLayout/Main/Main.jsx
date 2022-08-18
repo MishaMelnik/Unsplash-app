@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // COMPONENTS
 import Posts from '../Posts/Posts';
+// REDUX
+import { useSelector } from 'react-redux';
+import getDefaultPhoto from '../../../store/appStores/getDefaultPhotoStore/selectorGetDefaultPhoto';
+import DefaultPhotoActions from '../../../store/appStores/getDefaultPhotoStore/getDefaultPhotoActions';
+
 // MATERIAL
 import { IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
 import './Main.scss';
-// IMG
-import img from '../../../img/img3.svg';
 
 const Main = () => {
+  useEffect(() => {
+    DefaultPhotoActions.loadDefaultPhoto();
+  }, []);
+  const defaultPhoto = useSelector(getDefaultPhoto);
   const [value, setValue] = useState('');
 
   const navbarLinks = [
@@ -34,9 +41,9 @@ const Main = () => {
                 <br />
                 Day by
                 <br />
-                Mary Skrynnikova
+                {`${defaultPhoto[0].name}`}
               </span>
-              <span className="container_subtitle2">Mary Skrynnikova</span>
+              <span className="container_subtitle2">{defaultPhoto[0]?.description}</span>
               <button className="container_button">Explore All</button>
             </div>
           </div>
@@ -69,7 +76,11 @@ const Main = () => {
             </div>
           </div>
           <div className="container_boxImg">
-            <img className="container_img" src={img} alt="img" />
+            <img
+              className="container_img"
+              src={`${defaultPhoto[0].photo}`}
+              alt={`${defaultPhoto[0].alt_description}`}
+            />
           </div>
         </div>
       </div>

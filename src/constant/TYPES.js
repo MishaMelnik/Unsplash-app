@@ -1,0 +1,1 @@
+export const ADD_DEFAULT_PHOTO = 'ADD_DEFAULT_PHOTO';
