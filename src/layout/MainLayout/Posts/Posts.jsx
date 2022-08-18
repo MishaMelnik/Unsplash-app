@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 // COMPONENTS
 import ModalCase from './ModalCase/ModalCase';
+// PACKAGE
+import InfiniteScroll from 'react-infinite-scroll-component';
 // MATERIAL
 import { Card, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -9,8 +11,6 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Divider from '@mui/material/Divider';
 // SCSS
 import './Posts.scss';
-// PACKAGE
-import InfiniteScroll from 'react-infinite-scroll-component';
 // IMG
 import img from '../../../img/modal_img_1.png';
 

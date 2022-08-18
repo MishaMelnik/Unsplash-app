@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+// COMPONENTS
+import Posts from '../Posts/Posts';
 // MATERIAL
-import { Button, IconButton, InputBase, Typography } from '@mui/material';
+import { IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
 import './Main.scss';
 // IMG
 import img from '../../../img/img3.svg';
-import Posts from '../Posts/Posts';
 
 const Main = () => {
   const [value, setValue] = useState('');
