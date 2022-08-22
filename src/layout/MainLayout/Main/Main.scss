@@ -1,11 +1,11 @@
 .main {
   padding-top: 50px;
-  height: 93vh;
+  height: 92.85vh;
 
   &_container {
     position: relative;
     display: flex;
-    height: 93vh;
+    height: 92.85vh;
     @media screen and(max-width: 525px) {
       justify-content: center;
       align-items: center;
@@ -27,7 +27,7 @@
 
   &_boxImg {
     width: 50%;
-    height: 93vh;
+    height: 92.85vh;
     position: relative;
     z-index: 1;
     @media screen and(max-width: 525px) {
@@ -49,6 +49,7 @@
 
   &_subtitle1 {
     font-size: 3rem;
+    margin-bottom: 20px;
     font-weight: 500;
     @media screen and(max-width: 768px) {
       font-size: 2rem;
@@ -58,12 +59,6 @@
     }
   }
 
-  &_subtitle2 {
-    margin: 20px 0 20px 0;
-    font-weight: 500;
-    font-size: 1rem;
-  }
-
   &_button {
     color: white;
     border: none;
@@ -71,7 +66,7 @@
     border-radius: 80px;
     padding: 2vh 5vw;
     width: 100%;
-    max-width: 70%;
+    max-width: 90%;
     @media screen and(max-width: 525px) {
       max-width: 100%;
     }

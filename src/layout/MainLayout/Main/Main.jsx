@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
+// COMPONENTS
+import { MemoizedPosts } from '../Posts/Posts';
+// REDUX
+import { useSelector } from 'react-redux';
+import getDefaultPhoto from '../../../store/appStores/getDefaultPhotoStore/selectorGetDefaultPhoto';
 // MATERIAL
-import { Button, IconButton, InputBase, Typography } from '@mui/material';
+import { IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
 import './Main.scss';
-// IMG
-import img from '../../../img/img3.svg';
-import Posts from '../Posts/Posts';
+import ResponsePhotoActions from '../../../store/appStores/getResponsePhotoStore/getResponsePhotoActions';
+import DefaultPhotoActions from '../../../store/appStores/getDefaultPhotoStore/getDefaultPhotoActions';
 
 const Main = () => {
+  const defaultPhoto = useSelector(getDefaultPhoto);
   const [value, setValue] = useState('');
-
+  useEffect(() => {
+    DefaultPhotoActions.loadDefaultPhoto();
+  }, []);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    ResponsePhotoActions.loadSearchPhoto({
+      search: value,
+    });
+    setValue('');
+  };
+  const handleUseTage = (tag) => {
+    ResponsePhotoActions.loadSearchPhoto({
+      search: tag,
+    });
+  };
   const navbarLinks = [
     { title: 'Trending' },
     { title: 'Nature' },
@@ -33,15 +52,14 @@ const Main = () => {
                 <br />
                 Day by
                 <br />
-                Mary Skrynnikova
+                {`${defaultPhoto[0]?.name}`}
               </span>
-              <span className="container_subtitle2">Mary Skrynnikova</span>
               <button className="container_button">Explore All</button>
             </div>
           </div>
           <div className="container_searchLineBox">
             <div className="container_line">
-              <form className="container_form">
+              <form onSubmit={handleSubmit} className="container_form">
                 <InputBase
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
@@ -58,7 +76,14 @@ const Main = () => {
                     {navbarLinks.map((item) => {
                       return (
                         <li className="toolbar_item" key={item.title}>
-                          <span className="toolbar_link">{item.title}</span>
+                          <span
+                            onClick={() => {
+                              handleUseTage(item.title);
+                            }}
+                            className="toolbar_link"
+                          >
+                            {item.title}
+                          </span>
                         </li>
                       );
                     })}
@@ -68,13 +93,17 @@ const Main = () => {
             </div>
           </div>
           <div className="container_boxImg">
-            <img className="container_img" src={img} alt="img" />
+            <img
+              className="container_img"
+              src={`${defaultPhoto[0]?.photo}`}
+              alt={`${defaultPhoto[0]?.alt_description}`}
+            />
           </div>
         </div>
       </div>
-      <Posts />
+      <MemoizedPosts />
     </div>
   );
 };
 
-export default Main;
+export const MemoizedMain = memo(Main);
