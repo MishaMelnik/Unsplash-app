@@ -1,7 +1,4 @@
 .main {
-  padding-top: 50px;
-  height: 92.85vh;
-
   &_container {
     position: relative;
     display: flex;
@@ -41,12 +38,6 @@
     object-fit: cover;
   }
 
-  &_description {
-    padding: 0 40px 0 40px;
-    display: flex;
-    flex-direction: column;
-  }
-
   &_subtitle1 {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -70,14 +61,6 @@
     @media screen and(max-width: 525px) {
       max-width: 100%;
     }
-  }
-
-  &_searchLineBox {
-    position: absolute;
-    z-index: 5;
-    top: 76vh;
-    left: 10vw;
-    right: 10vw;
   }
 
   &_line {
@@ -111,17 +94,6 @@
       border: 1px solid black;
     }
   }
-
-  &_inputBase {
-    padding-left: 2vw;
-    width: 90%;
-  }
-
-  &_toolbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
 .toolbar {
@@ -134,10 +106,6 @@
       flex-wrap: wrap;
       justify-content: center;
     }
-  }
-
-  &_item {
-    white-space: nowrap;
   }
 
   &_link {

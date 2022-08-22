@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // MATERIAL-UI
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton } from '@mui/material';
+import { AppBar, IconButton, Toolbar } from '@mui/material';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
@@ -17,8 +17,8 @@ const Header = () => {
     setMenuClicked(!menuClicked);
   };
   return (
-    <div className="header">
-      <div className="header_container container">
+    <AppBar position="fixed" sx={{ zIndex: '10', backgroundColor: 'white', boxShadow: '0 1px 8px rgba(0, 0, 0, 0.5)' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
         {menuClicked ? (
           <IconButton className="container_menu" onClick={toggleMenuClick}>
             <MenuIcon />
@@ -43,8 +43,8 @@ const Header = () => {
         <IconButton>
           <SearchIcon />
         </IconButton>
-      </div>
-    </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 
