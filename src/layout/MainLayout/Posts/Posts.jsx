@@ -28,9 +28,9 @@ const Posts = () => {
     <Container maxWidth="xl" sx={{ marginTop: '50px', marginBottom: '40px' }}>
       <Grid container spacing={3}>
         {post?.map((item, idx) => (
-          <Grid item key={item?.id} xs={12} sm={6} md={3}>
-            <Card>
-              <div onClick={() => handleOpen(idx)}>
+          <Grid sx={{ display: 'flex' }} item key={item?.id} xs={12} sm={6} md={3}>
+            <Card sx={{ alignItems: 'stretch', width: '100%' }}>
+              <Box onClick={() => handleOpen(idx)}>
                 <CardMedia image={item?.urls?.regular} sx={{ paddingTop: '35vh', cursor: 'pointer' }} />
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
@@ -40,7 +40,7 @@ const Posts = () => {
                     {format(new Date(item?.created_at), 'E MMM HH:mm y')}
                   </Typography>
                 </CardContent>
-              </div>
+              </Box>
               <Divider />
               <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <IconButton>

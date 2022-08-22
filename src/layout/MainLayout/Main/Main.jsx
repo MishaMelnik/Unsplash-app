@@ -1,16 +1,14 @@
 import React, { memo, useEffect, useState } from 'react';
-// COMPONENTS
-import { MemoizedPosts } from '../Posts/Posts';
 // REDUX
 import { useSelector } from 'react-redux';
 import getDefaultPhoto from '../../../store/appStores/getDefaultPhotoStore/selectorGetDefaultPhoto';
+import ResponsePhotoActions from '../../../store/appStores/getResponsePhotoStore/getResponsePhotoActions';
+import DefaultPhotoActions from '../../../store/appStores/getDefaultPhotoStore/getDefaultPhotoActions';
 // MATERIAL
-import { IconButton, InputBase } from '@mui/material';
+import { Box, Button, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 // SCSS
 import './Main.scss';
-import ResponsePhotoActions from '../../../store/appStores/getResponsePhotoStore/getResponsePhotoActions';
-import DefaultPhotoActions from '../../../store/appStores/getDefaultPhotoStore/getDefaultPhotoActions';
 
 const Main = () => {
   const defaultPhoto = useSelector(getDefaultPhoto);
@@ -42,67 +40,66 @@ const Main = () => {
   ];
 
   return (
-    <div>
-      <div className="main">
-        <div className="main_container container">
-          <div className="container_boxDescription">
-            <div className="container_description">
-              <span className="container_subtitle1">
-                Photo of the
-                <br />
-                Day by
-                <br />
-                {`${defaultPhoto[0]?.name}`}
-              </span>
-              <button className="container_button">Explore All</button>
-            </div>
-          </div>
-          <div className="container_searchLineBox">
-            <div className="container_line">
-              <form onSubmit={handleSubmit} className="container_form">
-                <InputBase
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  className="container_inputBase"
-                  placeholder="Search for high-resolution photos"
-                />
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              </form>
-              <div className="container_toolbar toolbar">
-                <div>
-                  <ul className="toolbar_list">
-                    {navbarLinks.map((item) => {
-                      return (
-                        <li className="toolbar_item" key={item.title}>
-                          <span
-                            onClick={() => {
-                              handleUseTage(item.title);
-                            }}
-                            className="toolbar_link"
-                          >
-                            {item.title}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="container_boxImg">
-            <img
-              className="container_img"
-              src={`${defaultPhoto[0]?.photo}`}
-              alt={`${defaultPhoto[0]?.alt_description}`}
-            />
-          </div>
-        </div>
-      </div>
-      <MemoizedPosts />
-    </div>
+    <Box sx={{ paddingTop: '50px' }}>
+      <Box className="main_container container">
+        <Box className="container_boxDescription">
+          <Box sx={{ padding: '0 40px 0 40px', display: 'flex', flexDirection: 'column' }}>
+            <span className="container_subtitle1">
+              Photo of the
+              <br />
+              Day by
+              <br />
+              {`${defaultPhoto[0]?.name}`}
+            </span>
+            <Button sx={{ borderRadius: '80px', padding: '1.5vh 5vw' }} variant="contained" color="success">
+              Explore All
+            </Button>
+          </Box>
+        </Box>
+        <Box sx={{ position: 'absolute', zIndex: 5, top: '76vh', left: '10vw', right: '10vw' }}>
+          <Box className="container_line">
+            <form onSubmit={handleSubmit} className="container_form">
+              <InputBase
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                sx={{ paddingLeft: '2vw', width: '90%' }}
+                placeholder="Search for high-resolution photos"
+              />
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+            </form>
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Box>
+                <ul className="toolbar_list">
+                  {navbarLinks.map((item) => {
+                    return (
+                      <li className="toolbar_item" key={item.title}>
+                        <span
+                          onClick={() => {
+                            handleUseTage(item.title);
+                          }}
+                          className="toolbar_link"
+                        >
+                          {item.title}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box className="container_boxImg">
+          <img
+            className="container_img"
+            src={`${defaultPhoto[0]?.photo}`}
+            alt={`${defaultPhoto[0]?.alt_description}`}
+          />
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
