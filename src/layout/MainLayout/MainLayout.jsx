@@ -1,15 +1,13 @@
 import React from 'react';
 // COMPONENTS
 import Header from './Header/Header';
-import Main from './Main/Main';
-// STYLES
-import './MainLayout.scss';
+import { MemoizedMain } from './Main/Main';
 
 const MainLayout = () => {
   return (
-    <div className="mainLayout">
+    <div>
       <Header />
-      <Main />
+      <MemoizedMain />
     </div>
   );
 };

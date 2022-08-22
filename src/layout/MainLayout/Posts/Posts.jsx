@@ -1,115 +1,65 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 // COMPONENTS
-import ModalCase from './ModalCase/ModalCase';
+// import ModalCase from './ModalCase/ModalCase';
 // PACKAGE
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { format } from 'date-fns';
+// REDUX
+import { useSelector } from 'react-redux';
+import getResponsePhoto from '../../../store/appStores/getResponsePhotoStore/selectorGetResponsePhoto';
 // MATERIAL
-import { Card, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Divider from '@mui/material/Divider';
-// SCSS
-import './Posts.scss';
-// IMG
-import img from '../../../img/modal_img_1.png';
 
 const Posts = () => {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState();
 
-  const pictures = [
-    {
-      id: 'gWmedfsdfNwghtrtwtetrn04A',
-    },
-    {
-      id: 'gWmeNw13413dfsgsdfgsgsgrn04A',
-    },
-    {
-      id: 'gWmeNwdsfsdfrn04sfsdfsdfA',
-    },
-    {
-      id: 'gWsdfsdfsdfsdmeNwafavZxfrn04A',
-    },
-    {
-      id: 'gWmeNwafavZxfrn0werewrwe4A',
-    },
-    {
-      id: 'gWme2222NwafavZxfrn04A',
-    },
-    {
-      id: 'gWmeNw43r545afavZxfrn04A',
-    },
-    {
-      id: 'gWmeNwafavZxfrn04A',
-    },
-  ];
-
   const handleOpen = (idx) => {
     setIndex(idx);
     setOpen(true);
   };
-  const normalTime = (time) => {
-    const date = Date(time);
-    const fullDate = date.toLocaleString().split(' ');
-    const normalDate = `${fullDate[0]} ${fullDate[1]} ${fullDate[2]} ${fullDate[3]}`;
-    return normalDate;
-  };
 
-  const [page, setPage] = useState(1);
-  const scrollHandler = () => {
-    setPage(() => page + 1);
-  };
+  const post = useSelector(getResponsePhoto);
+  console.log(post);
 
   return (
-    <Container maxWidth="xl" className="posts_container">
-      <InfiniteScroll
-        dataLength={10}
-        next={scrollHandler}
-        hasMore={true}
-        loader={<Typography textAlign="center">Loading...</Typography>}
-        endMessage={<Typography textAlign="center">Its all</Typography>}
-      >
-        <Grid container spacing={3}>
-          {pictures?.map((item, idx) => (
-            <Grid item key={item?.id} xs={12} sm={6} md={3}>
-              <Card className="posts_card">
-                <div onClick={() => handleOpen(idx)}>
-                  <CardMedia image={img} className="posts_cardMedia" />
-                  <CardContent style={{ height: 150 }}>
-                    <Typography variant="h5" gutterBottom>
-                      dsfsfdsfd
-                    </Typography>
-                    {/* <Typography paragraph color="darkgrey">*/}
-                    {/*  {normalTime(item?.user.updated_at)}*/}
-                    {/* </Typography>*/}
-                    <Typography color="darkgrey">dsfsdfsdfdf</Typography>
-                  </CardContent>
-                </div>
-                <Divider />
-                <CardActions className="posts_cardActions">
+    <Container maxWidth="xl" sx={{ marginTop: '50px', marginBottom: '40px' }}>
+      <Grid container spacing={3}>
+        {post?.map((item, idx) => (
+          <Grid item key={item?.id} xs={12} sm={6} md={3}>
+            <Card>
+              <div onClick={() => handleOpen(idx)}>
+                <CardMedia image={item?.urls?.regular} sx={{ paddingTop: '35vh', cursor: 'pointer' }} />
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    {item?.user?.name}
+                  </Typography>
+                  <Typography paragraph color="darkgrey">
+                    {format(new Date(item?.created_at), 'E MMM HH:mm y')}
+                  </Typography>
+                </CardContent>
+              </div>
+              <Divider />
+              <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <IconButton>
+                  <BookmarkBorderIcon />
+                </IconButton>
+                <Box paddingRight="2vw">
                   <IconButton>
-                    <BookmarkBorderIcon />
+                    <FavoriteBorderIcon />
                   </IconButton>
-                  <div className="posts_card_icons">
-                    <IconButton>
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                    <span>512</span>
-                    <IconButton>
-                      <ChatBubbleOutlineIcon />
-                    </IconButton>
-                    <span>512</span>
-                  </div>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-          <ModalCase open={open} setOpen={setOpen} pictures={pictures} picture={pictures[index]} />
-        </Grid>
-      </InfiniteScroll>
+                  <span>{item?.likes}</span>
+                </Box>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+        {/* <ModalCase open={open} setOpen={setOpen} pictures={pictures} picture={pictures[index]} />*/}
+      </Grid>
     </Container>
   );
 };
 
-export default Posts;
+export const MemoizedPosts = memo(Posts);

@@ -1,11 +1,11 @@
 import React from 'react';
 // ROUTING
-import MainLayout from './layout/MainLayout/MainLayout';
+import Routes from './routes/AppRouter/AppRouter';
 
 const App = () => {
   return (
     <div>
-      <MainLayout />
+      <Routes />
     </div>
   );
 };

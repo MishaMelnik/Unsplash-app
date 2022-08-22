@@ -10,11 +10,10 @@ const sortedResponse = (data) => {
   const photoData = data.flat(1);
   const resulData = {
     name: photoData[0]?.user?.name,
-    description: photoData[0]?.description,
     photo: photoData[0]?.urls?.regular,
     alt_description: photoData[0]?.alt_description,
   };
-  // return DefaultPhotoActions.addDefaultPhoto(resulData);
+  return DefaultPhotoActions.addDefaultPhoto(resulData);
 };
 
 const DefaultPhotoActions = {
