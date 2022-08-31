@@ -1,16 +1,18 @@
 import React, { memo, useState } from 'react';
 // COMPONENTS
-// import ModalCase from './ModalCase/ModalCase';
-// PACKAGE
-import { format } from 'date-fns';
+import ModalCase from './ModalCase/ModalCase';
 // REDUX
 import { useSelector } from 'react-redux';
 import getResponsePhoto from '../../../store/appStores/getResponsePhotoStore/selectorGetResponsePhoto';
+// REACT-ROUTER-DOM
+import { Link } from 'react-router-dom';
 // MATERIAL
 import { Box, Card, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Divider from '@mui/material/Divider';
+// PACKAGE
+import { format } from 'date-fns';
 
 const Posts = () => {
   const [open, setOpen] = useState(false);
@@ -20,9 +22,7 @@ const Posts = () => {
     setIndex(idx);
     setOpen(true);
   };
-
   const post = useSelector(getResponsePhoto);
-  console.log(post);
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: '50px', marginBottom: '40px' }}>
@@ -31,7 +31,9 @@ const Posts = () => {
           <Grid sx={{ display: 'flex' }} item key={item?.id} xs={12} sm={6} md={3}>
             <Card sx={{ alignItems: 'stretch', width: '100%' }}>
               <Box onClick={() => handleOpen(idx)}>
-                <CardMedia image={item?.urls?.regular} sx={{ paddingTop: '35vh', cursor: 'pointer' }} />
+                <Link key={Math.random()} to={`/modal/${item?.id}`}>
+                  <CardMedia image={item?.urls?.regular} sx={{ paddingTop: '35vh', cursor: 'pointer' }} />
+                </Link>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
                     {item?.user?.name}
@@ -46,7 +48,7 @@ const Posts = () => {
                 <IconButton>
                   <BookmarkBorderIcon />
                 </IconButton>
-                <Box paddingRight="2vw">
+                <Box paddingRight="1vw">
                   <IconButton>
                     <FavoriteBorderIcon />
                   </IconButton>
@@ -56,7 +58,7 @@ const Posts = () => {
             </Card>
           </Grid>
         ))}
-        {/* <ModalCase open={open} setOpen={setOpen} pictures={pictures} picture={pictures[index]} />*/}
+        <ModalCase open={open} setOpen={setOpen} post={post[index]} />
       </Grid>
     </Container>
   );
